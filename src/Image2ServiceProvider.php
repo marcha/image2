@@ -25,7 +25,7 @@ class Image2ServiceProvider extends ServiceProvider {
             require __DIR__.'/routes.php';
     
             $this->publishes([
-                __DIR__.'/../../../../config/config.php' => config_path('image.php'),
+                __DIR__.'/../../../config/config.php' => config_path('image.php'),
             ]);
         }
     
