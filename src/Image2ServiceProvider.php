@@ -22,7 +22,7 @@ class Image2ServiceProvider extends ServiceProvider {
     
         public function boot() {
     
-            include(__DIR__.'/routes.php');
+            include(__DIR__.'/Providers/routes.php');
         }
     
     
