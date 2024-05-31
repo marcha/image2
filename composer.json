@@ -30,8 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Marcha\\Image2\\": "src/",
-            "Marcha\\Image2\\Database\\Factories\\": "database/factories/"
+            "Marcha\\Image2\\": "src/"
         }
     },
     "autoload-dev": {
