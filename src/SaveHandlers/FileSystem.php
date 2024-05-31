@@ -1,0 +1,71 @@
+<?php 
+
+namespace marcha\Image2\SaveHandlers;
+
+use marcha\Image2\Image;
+use marcha\Image2\Providers\ProviderInterface;
+
+class FileSystem implements SaveHandlerInterface {
+
+    private $basePath;
+
+    public function __construct(ProviderInterface $provider)
+    {
+        $this->basePath = $provider->publicPath();
+    }
+
+
+    public function setPaths($imgPath, $publicPath)
+    {
+        $this->srcPath = $publicPath . $imgPath;
+        $this->savePath = dirname($this->srcPath) . '/';
+    }
+
+
+    public function getPublicPath()
+    {
+        return $this->basePath;
+    }
+
+
+    public function getPublicServePath()
+    {
+        return str_replace($this->basePath, '', $this->savePath);
+    }
+
+
+    public function getSrcPath()
+    {
+        return $this->srcPath;
+    }
+
+
+    public function getSavePath()
+    {
+        return $this->savePath;
+    }
+
+
+    public function exists($filename)
+    {
+        $filePath = $this->savePath . $filename;
+        return file_exists($filePath);
+    }
+
+    public function getSize($filename)
+    {
+        $filePath = $this->savePath . $filename;
+        return filesize($filePath);
+    }
+
+
+    public function save($filename, array $data)
+    {
+        $path = $this->savePath;
+        if(!is_dir($path)) {
+            mkdir($path, true);
+        }
+        file_put_contents($path . $filename, $data['data']);
+    }
+
+}
