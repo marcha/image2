@@ -22,11 +22,7 @@ class Image2ServiceProvider extends ServiceProvider {
     
         public function boot() {
     
-            require __DIR__.'/routes.php';
-    
-            $this->publishes([
-                __DIR__.'/../../../config/config.php' => config_path('image.php'),
-            ]);
+            include(__DIR__.'/routes.php');
         }
     
     
@@ -38,7 +34,7 @@ class Image2ServiceProvider extends ServiceProvider {
         public function register()
         {
     
-            // Config::package('marcha/image', __DIR__.'/../../../../../config');
+            Config::package('marcha/image', __DIR__.'/../../../../../config');
             // config('marcha/image', __DIR__.'/../../../../config');
     
             $this->registerCache();
@@ -69,7 +65,7 @@ class Image2ServiceProvider extends ServiceProvider {
         private function registerImageFileSaveHandler()
         {
             $app = $this->app;
-            $this->app->bind('marcha.Image.saveHandler', function() use ($app) {
+            $this->app->bind('marcha.Image2.saveHandler', function() use ($app) {
                 return new FileSystem(new LaravelProvider($app['marcha.Image2.cache']));
             });
         }
