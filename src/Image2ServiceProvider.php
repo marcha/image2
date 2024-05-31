@@ -6,10 +6,9 @@ use Config;
 use Illuminate\Support\ServiceProvider;
 use marcha\Image2\Provider as LaravelProvider;
 use marcha\Image2\Image;
-use marcha\Image2\Providers\Laravel\Commands\MoveAssetCommand;
 use marcha\Image2\Cache\ProviderCacher;
 use marcha\Image2\SaveHandlers\FileSystem;
-use Marcha\Image2\Commands\Image2Command;
+use Marcha\Image2\Commands\MoveAssetCommand;
 
 
 class Image2ServiceProvider extends ServiceProvider {
@@ -53,7 +52,7 @@ class Image2ServiceProvider extends ServiceProvider {
     
         private function registerCache() {
     
-            $this->app->bind('marcha.Image.cache', function() {
+            $this->app->bind('marcha.Image2.cache', function() {
                 // default cache is file
                 // trying to keep image cache separate from other cache
                 $config = array();
@@ -71,7 +70,7 @@ class Image2ServiceProvider extends ServiceProvider {
         {
             $app = $this->app;
             $this->app->bind('marcha.Image.saveHandler', function() use ($app) {
-                return new FileSystem(new LaravelProvider($app['marcha.Image.cache']));
+                return new FileSystem(new LaravelProvider($app['marcha.Image2.cache']));
             });
         }
     
