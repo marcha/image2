@@ -34,8 +34,8 @@ class Image2ServiceProvider extends ServiceProvider {
         public function register()
         {
     
-            Config::package('marcha/image', __DIR__.'/../../../../../config');
-            // config('marcha/image', __DIR__.'/../../../../config');
+            //Config::package('marcha/image2', __DIR__.'/../../../../../config');
+            config('marcha/image2', __DIR__.'/../../../../config');
     
             $this->registerCache();
             $this->registerImageFileSaveHandler();
